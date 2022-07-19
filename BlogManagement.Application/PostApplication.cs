@@ -4,13 +4,14 @@ using BlogManagement.Domain.PostAgg;
 
 namespace BlogManagement.Application;
 
-internal class PostApplication:IPostApplication
+public class PostApplication : IPostApplication
 {
     private readonly IPostRepository _postRepository;
     private readonly OperationResult _operationResult;
+
     public PostApplication(IPostRepository repository)
     {
-        _operationResult = new OperationResult("Posts");
+        _operationResult = new OperationResult();
         _postRepository = repository;
     }
 
@@ -21,20 +22,20 @@ internal class PostApplication:IPostApplication
             if (_postRepository.Exists(c => c.Title == post.Title))
                 return _operationResult.Failed("This Product Already Exists");
 
-            var command = new Post(post.MetaDescription, post.Keywords, post.Slug, post.CanonicalAddress, post.Title,
-                post.Content, post.Link, 0, post.ShortDescription, DateTime.Now, post.Picture,
-                post.PictureAlt, post.PictureTitle, post.CategoryId,post.StudyTime);
+            var command = new Post(post.Title, post.Content, post.Link, 0, post.ShortDescription, DateTime.Now
+                , post.Picture, post.PictureAlt, post.PictureTitle, post.CategoryId, post.StudyTime
+                , post.Keywords, post.MetaDescription, post.CanonicalAddress);
 
             _postRepository.Create(command);
             _postRepository.SaveChanges();
 
-            return _operationResult.But("Posts").Succeeded("The Operation is SuccessFull");
+            return _operationResult.Succeeded("The Operation is SuccessFull");
         }
         catch (Exception exception)
         {
             Console.WriteLine(exception);
             _operationResult.Failed("Operation Do not Work ,Call The Administration!!!");
-                throw;
+            throw;
         }
     }
 
@@ -46,24 +47,19 @@ internal class PostApplication:IPostApplication
             if (_postRepository.Exists(c => c.Id != post.Id && c.Title == post.Title))
                 return _operationResult.Failed("Duplicated");
 
-            currentPost?.Edit(post.MetaDescription,post.Keywords,post.Slug,post.CanonicalAddress,post.Title,post.Content,post.Link,0,post.ShortDescription,DateTime.Now, post.Picture
-                ,post.PictureAlt,post.PictureTitle,post.CategoryId,post.StudyTime);
+            currentPost?.Edit(post.MetaDescription, post.Keywords, post.Slug, post.CanonicalAddress, post.Title,
+                post.Content, post.Link, 0, post.ShortDescription, DateTime.Now, post.Picture
+                , post.PictureAlt, post.PictureTitle, post.CategoryId, post.StudyTime);
             _postRepository.SaveChanges();
-            return _operationResult.But("Posts").Succeeded("The Operation Is SuccessFull");
-
+            return _operationResult.Succeeded("The Operation Is SuccessFull");
         }
         catch (Exception exception)
         {
-                Console.WriteLine(exception);
-           return _operationResult.Failed("Invalid Operation");
-                
+            Console.WriteLine(exception);
+            return _operationResult.Failed("Invalid Operation");
         }
     }
 
-    public IEnumerable<PostViewModel> Search(PostSearchModel searchModel)
-    {
-        return _postRepository.Search(searchModel);
-    }
 
 
     public EditPost? GetDetails(long id)
@@ -71,34 +67,39 @@ internal class PostApplication:IPostApplication
         return _postRepository.GetDetails(id);
     }
 
-    public int IncreaseVote(long id)
+    public async Task<int> IncreaseVoteAsync(long id)
     {
-        var post= _postRepository.Get(id);
+        var post = _postRepository.Get(id);
         post?.IncreaseNoOfUpVotes();
-        _postRepository.SaveChanges();
+        await _postRepository.SaveChangesAsync();
         return post!.NumberOfUpVotes;
     }
 
-    public int DecreaseVoteToPost(long id)
+    public async Task<int> DecreaseVoteToPostAsync(long id)
     {
         var post = _postRepository.Get(id);
         post?.DecreaseNoOfUpVotes();
-        _postRepository.SaveChanges();
+        await _postRepository.SaveChangesAsync();
         return post!.NumberOfUpVotes;
-
     }
 
-    public void Active(long id)
+    public async Task<IEnumerable<PostViewModel>>? SearchAsync(PostSearchModel searchModel)
     {
-        var post = _postRepository.Get(id);
+        return await _postRepository.SearchAsync(searchModel)!;
+    }
+
+   
+    public async Task ActiveAsync(long id)
+    {
+        var post = await _postRepository.GetByAsync(id)!;
         post?.Active();
-        _postRepository.SaveChanges();
+        await _postRepository.SaveChangesAsync();
     }
 
-    public void DeActive(long id)
+    public async Task DeActiveAsync(long id)
     {
-        var post = _postRepository.Get(id);
+        var post = await _postRepository.GetByAsync(id)!;
         post?.DeActive();
-        _postRepository.SaveChanges();
+        await _postRepository.SaveChangesAsync();
     }
 }

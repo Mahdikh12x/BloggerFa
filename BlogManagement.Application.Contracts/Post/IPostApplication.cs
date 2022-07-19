@@ -6,11 +6,11 @@ namespace BlogManagement.Application.Contracts.Post
     {
         OperationResult Create(CreatePost post);
         OperationResult Edit(EditPost post);
-        IEnumerable<PostViewModel> Search(PostSearchModel searchModel);
+        Task<IEnumerable<PostViewModel>>? SearchAsync(PostSearchModel searchModel);
         EditPost? GetDetails(long id);
-        int IncreaseVote(long id);
-        int DecreaseVoteToPost(long id);
-        void Active(long id);
-        void DeActive(long id);
+        Task<int> IncreaseVoteAsync(long id);
+        Task<int> DecreaseVoteToPostAsync(long id);
+        Task ActiveAsync(long id);
+        Task DeActiveAsync(long id);
     }
 }

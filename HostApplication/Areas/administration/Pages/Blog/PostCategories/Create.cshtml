@@ -1,0 +1,78 @@
+﻿@model BlogManagement.Application.Contracts.PostCategory.CreatePostCategory
+
+<div class="modal-header">
+    <h3 class="modal-title" id="myModalLabel35"> Modal Title</h3>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+<form asp-page="./Index" asp-page-handler="Create"
+      method="post"
+      data-ajax="true"
+      data-callback=""
+      data-action="Refresh"
+      enctype="multipart/form-data">>
+    <div class="modal-body">
+        <div class="row">
+            <fieldset class="col-md-6 form-group floating-label-form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" type="text" class="form-control" onchange="makeSlug('Name', 'Slug')" placeholder="Name...">
+            </fieldset>
+            <fieldset class="col-md-6 form-group floating-label-form-group">
+                <label asp-for="Slug">Slug</label>
+                <input  asp-for="Slug" type="text" class="form-control" >
+            </fieldset>
+            <br>
+        </div>
+        <div class="row">
+            <fieldset class="col-md-12 form-group floating-label-form-group">
+                <label asp-for="Picture" for="Picture"></label>
+                <input asp-for="Picture" type="text" class="form-control" id="picture" placeholder="Picture...">
+            </fieldset>
+        </div>
+        <div class="row">
+            <fieldset class="col-md-6 form-group floating-label-form-group">
+                <label asp-for="PictureAlt" for="PictureAlt">Picture Alt</label>
+                <input asp-for="PictureAlt" type="text" class="form-control" id="pictureAlt" placeholder="PictureAlt">
+            </fieldset>
+            <fieldset class="col-md-6 form-group floating-label-form-group">
+                <label asp-for="PictureTitle" for="PictureAlt">Picture Title</label>
+                <input asp-for="PictureTitle" type="text" class="form-control" id="PictureTitle" placeholder="PictureTitle">
+            </fieldset>
+    
+            <br>
+        </div>
+        <div class="row">
+            <fieldset class="col-md-6 form-group floating-label-form-group">
+                <label asp-for="MetaDescription" for="MetaDescription">Meta Description</label>
+                <input asp-for="MetaDescription" type="text" class="form-control" id="MetaDescription" placeholder="MetaDescription">
+            </fieldset>
+      
+        <fieldset class="col-md-6 form-group floating-label-form-group">
+            <label asp-for="Keywords" for="Keywords">Keywords</label>
+            <input asp-for="Keywords" type="text" class="form-control" id="Keywords" placeholder="Keywords">
+        </fieldset>   
+            <br>
+        </div>
+     
+        <div class="row">
+            <fieldset class="col-md-12 form-group floating-label-form-group">
+                <label asp-for="Description" for="Description">Description</label>
+                <input asp-for="Description" type="text" class="form-control" id="Description" placeholder="Description">
+            </fieldset>
+        </div>
+        <div class="row">
+            <fieldset class="col-md-12 form-group floating-label-form-group">
+                <label asp-for="CanonicalAddress" for="CanonicalAddress">CanonicalAddress</label>
+                <input asp-for="CanonicalAddress" type="text" class="form-control" id="CanonicalAddress" placeholder="CanonicalAddress">
+            </fieldset>
+        </div>
+      
+        <br>
+    </div>
+    
+    <div class="modal-footer">
+        <input type="reset" class="btn btn-outline-secondary btn-lg" data-dismiss="modal" value="close">
+        <input type="submit"  class="btn btn-outline-primary btn-lg" value="Login">
+    </div>
+</form>

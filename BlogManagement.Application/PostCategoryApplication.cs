@@ -11,7 +11,7 @@ namespace BlogManagement.Application
         public PostCategoryApplication(IPostCategoryRepository postCategoryRepository)
         {
             _postCategoryRepository = postCategoryRepository;
-            _operationResult = new OperationResult("PostCategories");
+            _operationResult = new OperationResult();
         }
 
         public OperationResult Create(CreatePostCategory command)
@@ -27,18 +27,17 @@ namespace BlogManagement.Application
                 _postCategoryRepository.Create(postCategory);
 
                 _postCategoryRepository.SaveChanges();
-                _operationResult.But("Posts").Succeeded("The Operation is SuccessFull");
+             return   _operationResult.Succeeded("The Operation is SuccessFull");
 
-                throw new NotImplementedException();
             }
             catch (Exception exception)
             {
-
                         Console.WriteLine(exception);
                         return _operationResult.Failed("The Operation is Failed! Call The Administration");
             }
         }
 
+     
         public OperationResult Edit(EditPostCategory command)
         {
             try
@@ -51,7 +50,7 @@ namespace BlogManagement.Application
                 postCategory.Edit(command.MetaDescription,command.Keywords,command.Slug,command.CanonicalAddress,command.Name,command.Description,command.Picture,command.PictureAlt
                     ,command.PictureTitle);
                 _postCategoryRepository.SaveChanges();
-                return _operationResult.But("PostCategories").Succeeded("The Operation is SuccessFull");
+                return _operationResult.Succeeded("The Operation is SuccessFull");
             }
             catch (Exception exception)
             {
@@ -60,14 +59,15 @@ namespace BlogManagement.Application
             }
         }
 
+     
         public EditPostCategory? GetDetails(long id)
         {
            return _postCategoryRepository.GetDetails(id);
         }
 
-        public  List<PostCategoryViewModel>? Search(PostCategorySearchModel searchModel)
+        public async Task<List<PostCategoryViewModel>>? SearchAsync(PostCategorySearchModel searchModel)
         {
-            return _postCategoryRepository.Search(searchModel);
+            return await _postCategoryRepository.SearchAsync(searchModel)!;
         }
     }
 }

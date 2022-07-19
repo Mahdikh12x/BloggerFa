@@ -7,6 +7,6 @@ namespace BlogManagement.Application.Contracts.PostCategory
         OperationResult Create(CreatePostCategory command);
         OperationResult Edit(EditPostCategory command);
         EditPostCategory? GetDetails(long id);
-        List<PostCategoryViewModel>? Search(PostCategorySearchModel searchModel);
+        Task<List<PostCategoryViewModel>>? SearchAsync(PostCategorySearchModel searchModel);
     }
 }

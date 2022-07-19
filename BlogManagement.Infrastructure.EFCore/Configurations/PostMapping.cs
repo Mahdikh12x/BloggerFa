@@ -7,8 +7,9 @@ namespace BlogManagement.Infrastructure.EFCore.Configurations
     public class PostMapping:IEntityTypeConfiguration<Post>
     {
         public void Configure(EntityTypeBuilder<Post> builder)
-        {
+        { 
             builder.HasKey(x => x.Id);
+            //builder.Property(x => x.Id).HasField("Id");
             builder.Property(p => p.Title).HasMaxLength(500).IsRequired();
             builder.Property(p => p.Content).IsRequired();
             builder.Property(p => p.Picture).HasMaxLength(1000).IsRequired(false);

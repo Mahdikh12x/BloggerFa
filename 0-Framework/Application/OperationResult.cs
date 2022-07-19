@@ -2,49 +2,22 @@
 {
     public class OperationResult
     {
-        public bool Success { get; set; }
         public string Message { get; set; }
-        public string Table { get; set; }
-        public string Data { get; set; }
-        public string Operation { get; set; }
-        public DateTime OperationDate { get; set; }
+        public bool IsSuccess { get; set; }
 
-        public OperationResult(string table)
+        public OperationResult()
         {
-            Table = table;
-            Success = false;
-            OperationDate = DateTime.Now;
-
+            IsSuccess = false;
         }
-
-        public OperationResult(string table, string operation)
+        public OperationResult Succeeded(string message = "The Operation Is Done SuccessFully")
         {
-            Operation = operation;
-            Table = table;
-            Success = false;
-            OperationDate = DateTime.Now;
-        }
-
-        public OperationResult But(string table)
-        {
-            return new OperationResult(table);
-        }
-
-        public OperationResult SetData(string data)
-        {
-            Data = data;
-            return this;
-        }
-
-        public OperationResult Succeeded(string message)
-        {
+            IsSuccess = true;
             Message = message;
-            Success = true;
             return this;
         }
-
         public OperationResult Failed(string message)
         {
+            IsSuccess = false;
             Message = message;
             return this;
         }

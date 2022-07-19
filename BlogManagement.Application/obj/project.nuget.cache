@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "B0lD8UgvevO0D2frlZKYaoWBQpYO1tV6BOyz3jKe3KlUFAUPCG+ah8iCrsjrNXvxcozhWWTyJTLN3XfXTWsNvQ==",
+  "dgSpecHash": "Tyrx5ZFHaif0/1+s0phrTzS4TCNMQnn6mt47dZg89XyfXv4yk/CrEo+hcLI3TUkrK4NVi+A9tXFYZJZSbWO6Pg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Omen 15\\source\\repos\\BloggerFa\\BlogManagement.Application\\BlogManagement.Application.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Omen 15\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.6\\microsoft.entityframeworkcore.6.0.6.nupkg.sha512",
-    "C:\\Users\\Omen 15\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\6.0.6\\microsoft.entityframeworkcore.abstractions.6.0.6.nupkg.sha512",
-    "C:\\Users\\Omen 15\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\6.0.6\\microsoft.entityframeworkcore.analyzers.6.0.6.nupkg.sha512",
+    "C:\\Users\\Omen 15\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.7\\microsoft.entityframeworkcore.6.0.7.nupkg.sha512",
+    "C:\\Users\\Omen 15\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\6.0.7\\microsoft.entityframeworkcore.abstractions.6.0.7.nupkg.sha512",
+    "C:\\Users\\Omen 15\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\6.0.7\\microsoft.entityframeworkcore.analyzers.6.0.7.nupkg.sha512",
     "C:\\Users\\Omen 15\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\6.0.0\\microsoft.extensions.caching.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\Omen 15\\.nuget\\packages\\microsoft.extensions.caching.memory\\6.0.1\\microsoft.extensions.caching.memory.6.0.1.nupkg.sha512",
     "C:\\Users\\Omen 15\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\6.0.0\\microsoft.extensions.dependencyinjection.6.0.0.nupkg.sha512",

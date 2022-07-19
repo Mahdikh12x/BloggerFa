@@ -1,5 +1,6 @@
 ﻿using BlogManagement.Domain.PostAgg;
 using BlogManagement.Domain.PostCategoryAgg;
+using BlogManagement.Domain.TagAgg;
 using BlogManagement.Infrastructure.EFCore.Configurations;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,7 +22,8 @@ namespace BlogManagement.Infrastructure.EFCore
             base.OnModelCreating(modelBuilder);
         }
 
-        public DbSet<Post>? Posts { get; set; } 
+        public DbSet<Tag>? Tags { get; set; }
+        public DbSet<Post>? Posts { get; set; }
         public DbSet<PostCategory>? PostCategories { get; set; }
     }
 }

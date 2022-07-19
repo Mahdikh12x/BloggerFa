@@ -31,7 +31,8 @@ namespace BlogManagement.Infrastructure.EFCore.Repository
             }).FirstOrDefault(x=>x.Id==id);
         }
 
-        public List<PostCategoryViewModel>? Search(PostCategorySearchModel searchModel)
+
+        public async Task<List<PostCategoryViewModel>>? SearchAsync(PostCategorySearchModel searchModel)
         {
             var query = _blogContext.PostCategories?.AsNoTracking().Select(pc => new PostCategoryViewModel
             {
@@ -44,24 +45,9 @@ namespace BlogManagement.Infrastructure.EFCore.Repository
 
             if (!string.IsNullOrWhiteSpace(searchModel.Name))
                 query = query?.Where(x => x.Name!.Contains(searchModel.Name));
-
-            return query?.AsNoTracking().ToList();
-        } 
-        public async Task<List<PostCategoryViewModel>?> SearchAsync(PostCategorySearchModel searchModel)
-        {
-             var query = _blogContext.PostCategories?.AsNoTracking().Select(pc => new PostCategoryViewModel
-             {
-                 Id = pc.Id,
-                 Picture = pc.Picture,
-                 Name = pc.Name,
-                 CreationDate = pc.CreationDate.ToString(CultureInfo.InvariantCulture),
-                 Description = pc.Description
-             }).AsQueryable()!;
-
-            if (!string.IsNullOrWhiteSpace(searchModel.Name))
-                query = query?.Where(x => x.Name!.Contains(searchModel.Name));
-
-            return  await query?.AsNoTracking().ToListAsync()!;
+            var result= query?.OrderByDescending(c=>c.Id).AsNoTracking().ToListAsync();
+            
+            return await result!;
         }
     }
 }
