@@ -8,6 +8,7 @@ namespace HostApplication.Areas.administration.Pages.Blog.PostCategories
     {
         private readonly IPostCategoryApplication _postCategoryApplication;
         public List<PostCategoryViewModel>? PostCategories { get; set; }
+        
         public IndexModel(IPostCategoryApplication postCategoryApplication)
         {
             _postCategoryApplication = postCategoryApplication;
@@ -24,9 +25,13 @@ namespace HostApplication.Areas.administration.Pages.Blog.PostCategories
             return Partial("./Create");
         }
 
-        public JsonResult OnPostCreate(CreatePostCategory command)
+        public IActionResult OnPostCreate(CreatePostCategory command)
         {
-            return new JsonResult(_postCategoryApplication.Create(command));
+            if (ModelState.IsValid)
+            {
+                return new JsonResult(_postCategoryApplication.Create(command));
+            }
+            return Page();
         }
 
         public PartialViewResult OnGetEdit(long id)
@@ -37,8 +42,10 @@ namespace HostApplication.Areas.administration.Pages.Blog.PostCategories
 
         public IActionResult OnPostEdit(EditPostCategory command)
         {
+            if (!ModelState.IsValid) return RedirectToPage("./Index");
             var result = _postCategoryApplication.Edit(command);
             return new JsonResult(result);
+
         }
     }
 }

@@ -28,7 +28,7 @@ namespace _0_Framework.Application.Attributes
 
         public void AddValidation(ClientModelValidationContext context)
         {
-            context.Attributes.Add("data-val-extension", GetNotAllowedErrorMessage());
+            context.Attributes.Add("data-val-AllowedExtensions", GetNotAllowedErrorMessage());
         }
     }
 

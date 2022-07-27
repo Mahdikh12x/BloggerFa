@@ -15,19 +15,20 @@ namespace _0_Framework.Application.Attributes
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
             var file = (IFormFile)value!;
-            if (file==null) return ValidationResult.Success;
+            if (file == null) return ValidationResult.Success;
 
-                //return _maxFileSize > file.Length ? new ValidationResult(GetErrorMessage()) : ValidationResult.Success;
-                return _maxFileSize < file.Length ? new ValidationResult(GetErrorMessage()) : ValidationResult.Success;
+            //return _maxFileSize > file.Length ? new ValidationResult(GetErrorMessage()) : ValidationResult.Success;
+            return _maxFileSize < file.Length ? new ValidationResult(GetErrorMessage())
+                : ValidationResult.Success;
+
         }
-
 
         private string GetErrorMessage() => $" Maximum allowed file size is {_maxFileSize} bytes.";
 
         public void AddValidation(ClientModelValidationContext context)
         {
             context.Attributes.Add("data-val", "true");
-            context.Attributes.Add("data-val-maxsize", GetErrorMessage());
+            context.Attributes.Add("data-val-MaxFileSize", GetErrorMessage());
         }
     }
 }

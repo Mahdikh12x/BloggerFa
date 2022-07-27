@@ -187,7 +187,7 @@ $.validator.addMethod("MaxFileSize",
     function (value, element, params) {
         debugger;
         var size = element.files[0].size;
-        var maxSize = 1 * 1024 * 1024;
+        var maxSize = 5 * 1024 * 1024;
         if (size > maxSize)
             return false;
         else {
@@ -196,21 +196,22 @@ $.validator.addMethod("MaxFileSize",
     });
 $.validator.unobtrusive.adapters.addBool("MaxFileSize");
 
-//$.validator.addMethod("AllowedExtensions",
-//    function (value, element, params) {
-//        debugger;
-//        var extention = element.files[0].type.split("/")[1];
-//       /* var validateExtensions = element.dataset.valExtensionfiles*/;
+$.validator.addMethod("AllowedExtensions",
+    function (value, element, params) {
+        debugger;
+        var extention = element.files[0].type.split("/")[1];
+       /* var validateExtensions = element.dataset.valExtensionfiles*/;
+       debugger;
 
-//        var validFileExtensions = [".jpg", ".jpeg", ".png"];
+        var validFileExtensions = ["jpg", "jpeg", "png"];
 
-//        var ext = extention.toLowerCase();
-//        if (!validFileExtensions.includes(ext)) {
-//            return false;
-//        }
-//        else {
-//            return true;
-//        }
-//    }),
-//    $.validator.unobtrusive.adapters.addBool("AllowedExtensions");
+        var ext = extention.toLowerCase();
+        if (!validFileExtensions.includes(ext)) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }),
+    $.validator.unobtrusive.adapters.addBool("AllowedExtensions");
 

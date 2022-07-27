@@ -12,8 +12,8 @@ public class CreatePostCategory:SeoTags
     public string Name { get; set; } = null!;
     [Required(ErrorMessage = ValidationMessage.RequiredMessage)]
     public string Description { get; set; } = null!;
-    [MaxFileSize(1*1024*1024)]
-    [AllowedExtensions(new[]{ ".jpg", ".png" })]
+    [MaxFileSize(5*1024*1024,ErrorMessage = ValidationMessage.MaxFileSizeMessage)]
+    [AllowedExtensions(new[] { ".jpg", ".png",".jpeg" })]
     public IFormFile? Picture { get; set; }
     public string? PictureAlt { get; set; }
     public string? PictureTitle { get; set; }

@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\UploadedFiles\gaming-new\" />
+    <Folder Include="wwwroot\UploadedFiles\" />
   </ItemGroup>
 
 </Project>
