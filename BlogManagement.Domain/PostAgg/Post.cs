@@ -36,7 +36,7 @@ namespace BlogManagement.Domain.PostAgg
 
         }
 
-        public Post(string title, string content, string? link, long userId, string shortDescription, DateTime publishDate, string? picture, string? pictureAlt, string? pictureTitle, long categoryId, int studyTime, string keywords, string metaDescription, string? canonicalAddress)
+        public Post(string title, string content, string? link, long userId, string shortDescription, DateTime publishDate, string? picture, string? pictureAlt, string? pictureTitle, long categoryId, int studyTime, string keywords, string metaDescription, string? canonicalAddress,string slug)
         {
             Title = title;
             Content = content;
@@ -53,6 +53,7 @@ namespace BlogManagement.Domain.PostAgg
             Keywords = keywords;
             MetaDescription = metaDescription;
             CanonicalAddress = canonicalAddress;
+            Slug = slug;
             IsActive = false;
             NumberOfUpVotes = 0;
             NumberOfViews = 0;

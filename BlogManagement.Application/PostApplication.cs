@@ -24,7 +24,7 @@ public class PostApplication : IPostApplication
 
             var command = new Post(post.Title, post.Content, post.Link, 0, post.ShortDescription, DateTime.Now
                 , post.Picture, post.PictureAlt, post.PictureTitle, post.CategoryId, post.StudyTime
-                , post.Keywords, post.MetaDescription, post.CanonicalAddress);
+                , post.Keywords, post.MetaDescription, post.CanonicalAddress,post.Slug);
 
             _postRepository.Create(command);
             _postRepository.SaveChanges();
@@ -34,8 +34,7 @@ public class PostApplication : IPostApplication
         catch (Exception exception)
         {
             Console.WriteLine(exception);
-            _operationResult.Failed("Operation Do not Work ,Call The Administration!!!");
-            throw;
+           return _operationResult.Failed("Operation Do not Work ,Call The Administration!!!");
         }
     }
 
@@ -83,12 +82,13 @@ public class PostApplication : IPostApplication
         return post!.NumberOfUpVotes;
     }
 
-    public async Task<IEnumerable<PostViewModel>>? SearchAsync(PostSearchModel searchModel)
+
+    public async Task<List<PostViewModel>>? SearchAsync(PostSearchModel searchModel)
     {
         return await _postRepository.SearchAsync(searchModel)!;
     }
 
-   
+
     public async Task ActiveAsync(long id)
     {
         var post = await _postRepository.GetByAsync(id)!;

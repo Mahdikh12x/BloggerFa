@@ -11,68 +11,79 @@
       data-ajax="true"
       data-callback=""
       data-action="Refresh"
-      enctype="multipart/form-data">>
+      enctype="multipart/form-data">
     <div class="modal-body">
         <div class="row">
             <fieldset class="col-md-6 form-group floating-label-form-group">
-                <label asp-for="Name"></label>
+                <label asp-for="Name" class="label-control"></label>
                 <input asp-for="Name" type="text" class="form-control" onchange="makeSlug('Name', 'Slug')" placeholder="Name...">
+                <span asp-validation-for="Name" class="error danger"></span>
             </fieldset>
             <fieldset class="col-md-6 form-group floating-label-form-group">
-                <label asp-for="Slug">Slug</label>
-                <input  asp-for="Slug" type="text" class="form-control" >
+                <label asp-for="Slug" class="label-control">Slug</label>
+                <input asp-for="Slug" type="text" class="form-control">
+                <span asp-validation-for="Slug" class="error danger"></span>
             </fieldset>
             <br>
         </div>
         <div class="row">
             <fieldset class="col-md-12 form-group floating-label-form-group">
-                <label asp-for="Picture" for="Picture"></label>
-                <input asp-for="Picture" type="text" class="form-control" id="picture" placeholder="Picture...">
+                <div class="custom-file col-md-12">
+                    <input type="file" asp-for="Picture" class="custom-file-input">
+                    <label class="custom-file-label ">Choose file...</label>
+                    <span asp-validation-for="Picture" class="error danger"></span>
+
+                </div>
             </fieldset>
         </div>
         <div class="row">
             <fieldset class="col-md-6 form-group floating-label-form-group">
-                <label asp-for="PictureAlt" for="PictureAlt">Picture Alt</label>
+                <label asp-for="PictureAlt" class="label-control"></label>
                 <input asp-for="PictureAlt" type="text" class="form-control" id="pictureAlt" placeholder="PictureAlt">
+                <span asp-validation-for="PictureAlt" class="error danger"></span>
             </fieldset>
             <fieldset class="col-md-6 form-group floating-label-form-group">
-                <label asp-for="PictureTitle" for="PictureAlt">Picture Title</label>
+                <label asp-for="PictureTitle"  class="label-control">Picture Title</label>
                 <input asp-for="PictureTitle" type="text" class="form-control" id="PictureTitle" placeholder="PictureTitle">
+                <span asp-validation-for="PictureTitle" class="error danger"></span>
             </fieldset>
-    
+
             <br>
         </div>
+        <div class="row">
+            <fieldset class="col-md-12 form-group floating-label-form-group">
+                <label asp-for="Description"  class="label-control">Description</label>
+                <input asp-for="Description" type="text" class="form-control" placeholder="Description..." onchange="fillField('ShortDescription','MetaDescription')">
+                <span asp-validation-for="Description" class="error danger"></span>
+            </fieldset>
+        </div>
+        <div class="row">
+            <fieldset class="col-md-12 form-group floating-label-form-group">
+                <label asp-for="CanonicalAddress"  class="label-control">CanonicalAddress</label>
+                <input asp-for="CanonicalAddress" type="text" class="form-control" id="CanonicalAddress" placeholder="CanonicalAddress">
+                <span asp-validation-for="CanonicalAddress" class="error danger"></span>
+            </fieldset>
+        </div>
+        <br>
         <div class="row">
             <fieldset class="col-md-6 form-group floating-label-form-group">
-                <label asp-for="MetaDescription" for="MetaDescription">Meta Description</label>
+                <label asp-for="MetaDescription"  class="label-control">Meta Description</label>
                 <input asp-for="MetaDescription" type="text" class="form-control" id="MetaDescription" placeholder="MetaDescription">
+                <span asp-validation-for="MetaDescription" class="error danger"></span>
             </fieldset>
-      
-        <fieldset class="col-md-6 form-group floating-label-form-group">
-            <label asp-for="Keywords" for="Keywords">Keywords</label>
-            <input asp-for="Keywords" type="text" class="form-control" id="Keywords" placeholder="Keywords">
-        </fieldset>   
+
+            <fieldset class="col-md-6 form-group floating-label-form-group">
+                <label asp-for="Keywords"  class="label-control">Keywords</label>
+                <input asp-for="Keywords" type="text" class="form-control" id="Keywords" placeholder="Keywords">
+                <span asp-validation-for="Keywords" class="error danger"></span>
+            </fieldset>
             <br>
         </div>
-     
-        <div class="row">
-            <fieldset class="col-md-12 form-group floating-label-form-group">
-                <label asp-for="Description" for="Description">Description</label>
-                <input asp-for="Description" type="text" class="form-control" id="Description" placeholder="Description">
-            </fieldset>
-        </div>
-        <div class="row">
-            <fieldset class="col-md-12 form-group floating-label-form-group">
-                <label asp-for="CanonicalAddress" for="CanonicalAddress">CanonicalAddress</label>
-                <input asp-for="CanonicalAddress" type="text" class="form-control" id="CanonicalAddress" placeholder="CanonicalAddress">
-            </fieldset>
-        </div>
-      
-        <br>
+
     </div>
-    
+
     <div class="modal-footer">
         <input type="reset" class="btn btn-outline-secondary btn-lg" data-dismiss="modal" value="close">
-        <input type="submit"  class="btn btn-outline-primary btn-lg" value="Login">
+        <input type="submit" class="btn btn-outline-primary btn-lg" value="Login">
     </div>
 </form>

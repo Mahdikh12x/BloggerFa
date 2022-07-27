@@ -1,0 +1,47 @@
+﻿@model List<BlogManagement.Application.Contracts.PostCategory.PostCategoryViewModel>
+                        <table class="table table-responsive-md text-center" id="DataTables_Table_10" role="grid" aria-describedby="DataTables_Table_10_info">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>CreationDate</th>
+                                <th>Description</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Id</td>
+                                    @if (!string.IsNullOrWhiteSpace(@item.Picture))
+                                    {
+                                        <td>
+                                            <img src="~/UploadedFiles/@item.Picture" style="border-radius: 20px 20px; max-width: 85px" alt="CategoryPicture">
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            <img src="~/img/stock-vector-no-image-vector-isolated-on-white-background-1481369594.jpg" class="width-50 rounded-circle" alt="CategoryPicture">
+                                        </td>
+                                    }
+                                    <td>@item.Name</td>
+                                    <td>@item.CreationDate</td>
+                                    <td>@item.Description</td>
+                                    <td>
+                                        <a href="#showmodal=@Url.Page("./Index", "Edit", new { item.Id })" class="success p-0" data-original-title="" title="">
+                                            <i class="fa fa-pencil font-medium-3 mr-2"></i>
+                                        </a>
+                                        <a class="info p-0" data-original-title="" title="">
+                                            <i class="fa fa-check font-medium-3 mr-2"></i>
+                                        </a>
+                                        <a class="danger p-0" data-original-title="" title="">
+                                            <i class="fa fa-trash-o font-medium-3 mr-2"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>

@@ -8,5 +8,6 @@ namespace BlogManagement.Application.Contracts.PostCategory
         OperationResult Edit(EditPostCategory command);
         EditPostCategory? GetDetails(long id);
         Task<List<PostCategoryViewModel>>? SearchAsync(PostCategorySearchModel searchModel);
+        Task<IEnumerable<PostCategorySelectList>>? GetPostCategoryNames();
     }
 }

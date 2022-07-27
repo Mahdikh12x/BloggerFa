@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -17,6 +17,10 @@
   <ItemGroup>
     <ProjectReference Include="..\BlogManagement.Application.Contracts\BlogManagement.Application.Contracts.csproj" />
     <ProjectReference Include="..\BlogManagement.Infrastructure.Configuration\BlogManagement.Infrastructure.Configuration.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\UploadedFiles\gaming-new\" />
   </ItemGroup>
 
 </Project>

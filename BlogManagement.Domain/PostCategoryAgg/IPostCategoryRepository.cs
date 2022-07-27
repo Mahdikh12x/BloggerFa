@@ -7,6 +7,7 @@ namespace BlogManagement.Domain.PostCategoryAgg
     {
         EditPostCategory? GetDetails(long id);
         Task<List<PostCategoryViewModel>>? SearchAsync(PostCategorySearchModel searchModel);
+        Task<IEnumerable<PostCategorySelectList>>? GetPostCategoryNames();
     }
 }
 

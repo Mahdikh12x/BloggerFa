@@ -12,7 +12,7 @@ SinglePage.LoadModal = function () {
             const container = document.getElementById("ModalContent");
             const forms = container.getElementsByTagName("form");
             const newForm = forms[forms.length - 1];
-            //$.validator.unobtrusive.parse(newForm);
+            $.validator.unobtrusive.parse(newForm);
             showModal();
         }).fail(function (error) {
             alert("خطایی رخ داده، لطفا با مدیر سیستم تماس بگیرید.");
@@ -34,10 +34,10 @@ $(document).ready(function () {
     $("#MainModal").on("shown.bs.modal",
         function () {
             window.location.hash = "##";
-            $('.persianDatePickerFa').persianDatepicker({
-                format: 'YYYY/MM/DD',
-                autoClose: true
-            });
+            //$('.persianDatePickerFa').persianDatepicker({
+            //    format: 'YYYY/MM/DD',
+            //    autoClose: true
+            //});
         });
 
     $(document).on("submit",
@@ -79,7 +79,6 @@ $(document).ready(function () {
 });
 
 function CallBackHandler(data, action, form) {
-    debugger;
     switch (action) {
         case "Message":
             alert(data.Message);
@@ -184,21 +183,22 @@ function handleAjaxCall(method, url, data) {
     }
 }
 
-//jQuery.validator.addMethod("MaxFileSize",
-//    function (value, element, params) {
-//        var size = element.files[0].size;
-//        var maxSize = 3 * 1024 * 1024;
-//        if (size > maxSize)
-//            return false;
-//        else {
-//            return true;
-//        }
-//    });
-//jQuery.validator.unobtrusive.adapters.addBool("MaxFileSize");
+$.validator.addMethod("MaxFileSize",
+    function (value, element, params) {
+        debugger;
+        var size = element.files[0].size;
+        var maxSize = 1 * 1024 * 1024;
+        if (size > maxSize)
+            return false;
+        else {
+            return true;
+        }
+    });
+$.validator.unobtrusive.adapters.addBool("MaxFileSize");
 
-
-//jQuery.validator.addMethod("ExtensionFiles",
+//$.validator.addMethod("AllowedExtensions",
 //    function (value, element, params) {
+//        debugger;
 //        var extention = element.files[0].type.split("/")[1];
 //       /* var validateExtensions = element.dataset.valExtensionfiles*/;
 
@@ -212,5 +212,5 @@ function handleAjaxCall(method, url, data) {
 //            return true;
 //        }
 //    }),
-//    jQuery.validator.unobtrusive.adapters.addBool("ExtensionFiles");
+//    $.validator.unobtrusive.adapters.addBool("AllowedExtensions");
 

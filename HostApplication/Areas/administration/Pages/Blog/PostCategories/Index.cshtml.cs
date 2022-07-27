@@ -8,7 +8,6 @@ namespace HostApplication.Areas.administration.Pages.Blog.PostCategories
     {
         private readonly IPostCategoryApplication _postCategoryApplication;
         public List<PostCategoryViewModel>? PostCategories { get; set; }
-        public CreatePostCategory CreatePostCategory { get; set; }
         public IndexModel(IPostCategoryApplication postCategoryApplication)
         {
             _postCategoryApplication = postCategoryApplication;

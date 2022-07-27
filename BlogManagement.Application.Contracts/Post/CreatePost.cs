@@ -1,4 +1,5 @@
 ﻿using _0_Framework.Application;
+using BlogManagement.Application.Contracts.PostCategory;
 
 namespace BlogManagement.Application.Contracts.Post;
 
@@ -14,5 +15,6 @@ public class CreatePost:SeoTags
     public string PictureTitle { get;  set; } = null!;
     public long CategoryId { get; set; }
     public int StudyTime { get; set; }
+    public IEnumerable<PostCategorySelectList>? PostCategoryLists{ get; set; }
 
 }

@@ -11,4 +11,6 @@ public class PostViewModel
     public string? AuthorName { get; set; }
     public string PublishDate { get;  set; } = null!;
     public long CategoryId { get; set; }
+    public string? CategoryName { get; set; }
+    public bool IsActive { get; set; }
 }

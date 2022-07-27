@@ -8,9 +8,11 @@ namespace BlogManagement.Application
     {
         private readonly IPostCategoryRepository _postCategoryRepository;
         private readonly OperationResult _operationResult;
-        public PostCategoryApplication(IPostCategoryRepository postCategoryRepository)
+        private readonly IFileUploader _uploader;
+        public PostCategoryApplication(IPostCategoryRepository postCategoryRepository, IFileUploader uploader)
         {
             _postCategoryRepository = postCategoryRepository;
+            _uploader = uploader;
             _operationResult = new OperationResult();
         }
 
@@ -20,9 +22,10 @@ namespace BlogManagement.Application
             {
                 if (_postCategoryRepository.Exists(pc => pc.Name == command.Name))
                     return _operationResult.Failed("It is Duplicated ! Check It Again");
-
-                var postCategory = new PostCategory(command.MetaDescription, command.Keywords, command.Slug,
-                    command.CanonicalAddress, command.Name, command.Description, command.Picture, command.PictureAlt,
+                var slug=command.Slug.Slugify();
+                var picturePath =  _uploader.UploadFileAsync(command.Picture, $"//PostCategory{slug}").Result;
+                var postCategory = new PostCategory(command.MetaDescription, command.Keywords, slug,
+                    command.CanonicalAddress, command.Name, command.Description, picturePath, command.PictureAlt,
                     command.PictureTitle);
                 _postCategoryRepository.Create(postCategory);
 
@@ -47,7 +50,9 @@ namespace BlogManagement.Application
                     return _operationResult.Failed("There is a Duplication ! Check it Again");
                 if (postCategory == null)
                     return _operationResult.Failed("There is no Object To Find ! Try Again");
-                postCategory.Edit(command.MetaDescription,command.Keywords,command.Slug,command.CanonicalAddress,command.Name,command.Description,command.Picture,command.PictureAlt
+                var slug = command.Slug.Slugify();
+                var picturePath = _uploader.UploadFileAsync(command.Picture,$"/PostCategory/{slug}").Result;
+                postCategory.Edit(command.MetaDescription,command.Keywords,command.Slug,command.CanonicalAddress,command.Name,command.Description,picturePath,command.PictureAlt
                     ,command.PictureTitle);
                 _postCategoryRepository.SaveChanges();
                 return _operationResult.Succeeded("The Operation is SuccessFull");
@@ -68,6 +73,11 @@ namespace BlogManagement.Application
         public async Task<List<PostCategoryViewModel>>? SearchAsync(PostCategorySearchModel searchModel)
         {
             return await _postCategoryRepository.SearchAsync(searchModel)!;
+        }
+
+        public async Task<IEnumerable<PostCategorySelectList>>? GetPostCategoryNames()
+        {
+            return  await _postCategoryRepository.GetPostCategoryNames()!;
         }
     }
 }

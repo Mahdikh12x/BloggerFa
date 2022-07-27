@@ -25,7 +25,7 @@ namespace BlogManagement.Infrastructure.EFCore.Repository
                 Description = pc.Description,
                 Keywords = pc.Keywords,
                  PictureTitle = pc.PictureTitle,
-                 Picture = pc.Picture,
+                 //Picture = pc.Picture,
                  MetaDescription = pc.MetaDescription,
                  Slug = pc.Slug,
             }).FirstOrDefault(x=>x.Id==id);
@@ -48,6 +48,15 @@ namespace BlogManagement.Infrastructure.EFCore.Repository
             var result= query?.OrderByDescending(c=>c.Id).AsNoTracking().ToListAsync();
             
             return await result!;
+        }
+
+        public async Task<IEnumerable<PostCategorySelectList>>? GetPostCategoryNames()
+        {
+            return await _blogContext.PostCategories?.Select(pc => new PostCategorySelectList
+            {
+                Id = pc.Id,
+                Name = pc.Name
+            }).AsNoTracking().ToListAsync()!;
         }
     }
 }

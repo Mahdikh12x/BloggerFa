@@ -1,9 +1,12 @@
+using _0_Framework.Application;
 using BlogManagement.Infrastructure.Configuration;
+using HostApplication.Features;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetSection("connectionStrings")["BloggerFa"];
 
+builder.Services.AddTransient<IFileUploader, FileUploader>();
 BlogManagementBootstrapper.Config(builder.Services,connectionString);
 
 

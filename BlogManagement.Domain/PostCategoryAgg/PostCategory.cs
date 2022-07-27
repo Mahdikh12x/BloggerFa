@@ -25,7 +25,8 @@ namespace BlogManagement.Domain.PostCategoryAgg
         {
             Name = name;
             Description = description;
-            Picture = picture;
+            if(!string.IsNullOrWhiteSpace(picture))
+                Picture = picture;
             PictureAlt = pictureAlt;
             PictureTitle = pictureTitle;
             MetaDescription = metaDescription;
@@ -38,7 +39,8 @@ namespace BlogManagement.Domain.PostCategoryAgg
         {
             Name = name;
             Description = description;
-            Picture = picture;
+            if (!string.IsNullOrWhiteSpace(picture))
+                Picture = picture;
             PictureAlt = pictureAlt;
             PictureTitle = pictureTitle;
             MetaDescription = metaDescription;

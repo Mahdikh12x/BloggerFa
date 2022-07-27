@@ -1,0 +1,144 @@
+﻿@page 
+@model HostApplication.Areas.administration.Pages.Blog.Posts.EditModel
+@{
+    ViewData["Title"] = "Edit Post{}";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title-wrap bar-success">
+                    <h4 class="card-title" id="horz-layout-basic">Edit Post :@Model.Post.Title</h4>
+                </div>
+                <p class="mb-0">You Can Edit The Current Post... After Saving, The Previous Will be Lost</p>
+            </div>
+            <div class="card-body">
+                <div class="px-3">
+                    <form asp-page="./Edit" method="post" class="form form-horizontal"
+                          enctype="multipart/form-data">
+                        <div class="form-body">
+                            <h4 class="form-section">
+                                <i class="icon-user"></i>Title And Mains
+                            </h4>
+                            <div class="form-group row">
+                                <label class="col-md-3 label-control" asp-for="Post.Title"></label>
+                                <div class="col-md-9">
+                                    <input type="text" asp-for="Post.Title" class="form-control" onchange=" fillField('Title', 'Slug')">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-3 label-control" asp-for="Post.CategoryId"></label>
+                                <div class="col-md-9">
+                                    <select asp-for="Post.CategoryId" asp-items="Model.PostCategories" class="form-control">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-6 label-control" asp-for="Post.StudyTime"></label>
+                                        <div class="col-md-6">
+                                            <input type="number" asp-for="Post.StudyTime" class="form-control border-primary">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 label-control" asp-for="Post.Link"></label>
+                                        <div class="col-md-9">
+                                            <input type="text" asp-for="Post.Link" class="form-control border-primary">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div  class="form-group row">
+                                <label class="col-md-3 label-control" asp-for="Post.ShortDescription"> </label>
+                                <div  class="col-md-9">
+                                    <textarea asp-for="Post.ShortDescription" rows="3" class="form-control "></textarea>
+                                </div>
+                            </div>
+                            <h4 class="form-section">
+                                <i class="icon-book-open"></i>SEO Tags
+                            </h4>
+                            <div class="form-group row">
+                                <label class="col-md-3 label-control" asp-for="Post.Slug"></label>
+                                <div class="col-md-9">
+                                    <input type="text" asp-for="Post.Slug" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-3 label-control" asp-for="Post.Keywords"></label>
+                                <div class="col-md-9">
+                                    <input  type="text" asp-for="Post.Keywords" class="form-control ">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-3 label-control" asp-for="Post.MetaDescription"></label>
+                                <div class="col-md-9">
+                                    <input type="text" asp-for="Post.MetaDescription" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 label-control" asp-for="Post.CanonicalAddress"></label>
+                                <div class="col-md-9">
+                                    <input type="text" asp-for="Post.CanonicalAddress" class="form-control">
+                                </div>
+                            </div>
+                            <h4 class="form-section">
+                                <i class="icon-book-open"></i>Picture
+                            </h4>
+                            <div class="form-group row">
+                                <label class="col-md-3 label-control" asp-for="Post.Picture"></label>
+                                <div class="custom-file col-md-9">
+                                    <input type="file" asp-for="Post.Picture" class="custom-file-input">
+                                    <label class="custom-file-label ">Choose file</label>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 label-control" asp-for="Post.PictureAlt"></label>
+                                <div class="col-md-9">
+                                    <input type="text" asp-for="Post.PictureAlt" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-3 label-control" asp-for="Post.PictureTitle"></label>
+                                <div class="col-md-9">
+                                    <input type="text" asp-for="Post.PictureTitle" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div   class="form-group row">
+                            <label class="col-md-3 label-control" asp-for="Post.Content"> </label>
+                            <div   class="col-md-9">
+                                <input  id="editor"  asp-for="Post.Content" rows="8" class="form-control "/>
+                            </div>
+                            <input type="hidden" asp-for="Post.Id" value="@Model.Post.Id"/>
+                        </div>
+                       <br/>
+                        <div class="form-actions">
+                            <a  type="button" asp-page="./Index" class="btn btn-danger ml-1">
+                                <i class="icon-trash"></i> Cancel
+                            </a>
+                            <button type="submit" class="btn btn-success">
+                                <i class="icon-note"></i> Edit
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+                            

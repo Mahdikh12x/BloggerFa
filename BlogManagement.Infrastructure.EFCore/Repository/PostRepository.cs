@@ -31,13 +31,15 @@ namespace BlogManagement.Infrastructure.EFCore.Repository
                 Keywords = post.Keywords,
                 CanonicalAddress = post.CanonicalAddress,
                 MetaDescription = post.MetaDescription,
-                Slug = post.ShortDescription
+                Slug = post.ShortDescription,
+                StudyTime = post.StudyTime,
+                CategoryId = post.CategoryId,
             }).FirstOrDefault(i => i.Id == id);
         }
 
-        public async Task<IEnumerable<PostViewModel>>? SearchAsync(PostSearchModel searchModel)
+        public async Task<List<PostViewModel>>? SearchAsync(PostSearchModel searchModel)
         {
-            var query =  _context.Posts?.Select(p => new PostViewModel
+            var query =  _context.Posts?.Include(pc=>pc.PostCategory).Select(p => new PostViewModel
             {
                 Id = p.Id,
                 Title = p.Title,
@@ -47,7 +49,9 @@ namespace BlogManagement.Infrastructure.EFCore.Repository
                 PublishDate = p.PublishDate.ToString(CultureInfo.CurrentCulture),
                 DateModified = p.ModifiedDate.ToShortDateString(),
                 AuthorId = p.UserId,
-                AuthorName = "Admin"
+                AuthorName = "Admin",
+                IsActive = p.IsActive,
+                CategoryName = p.PostCategory!.Name
             }).AsQueryable();
 
             if(!string.IsNullOrWhiteSpace(searchModel.Title))

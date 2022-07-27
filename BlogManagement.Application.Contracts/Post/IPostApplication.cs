@@ -6,7 +6,7 @@ namespace BlogManagement.Application.Contracts.Post
     {
         OperationResult Create(CreatePost post);
         OperationResult Edit(EditPost post);
-        Task<IEnumerable<PostViewModel>>? SearchAsync(PostSearchModel searchModel);
+        Task<List<PostViewModel>>? SearchAsync(PostSearchModel searchModel);
         EditPost? GetDetails(long id);
         Task<int> IncreaseVoteAsync(long id);
         Task<int> DecreaseVoteToPostAsync(long id);
